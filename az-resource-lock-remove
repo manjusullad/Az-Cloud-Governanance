@@ -1,0 +1,9 @@
+Alert when Resource Lock is Removed.
+
+Prerequisites - All the subscription Activity logs should be connected to Log Analytics workspace.
+
+Alert Rule-  
+
+Whenever the Activity Log has an event with Category='Administrative', Operation name='Delete management locks', Status='succeeded'
+
+Create ALert Group with Email.
