@@ -1,0 +1,9 @@
+Email Alert When Owner role is assigned to group or user.
+
+Pre-requisites
+* All Subscriptions should be connected to Log Analytics workspace
+
+AzureActivity
+| where parse_json(tostring(parse_json(tostring(parse_json(Properties).requestbody)).Properties)).RoleDefinitionId == "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635" and _ResourceId !contains "resourceGroups"
+| project TenantId, SubscriptionId, OperationName, Caller, ActivityStatusValue, ResourceId, ResourceProvider, SourceSystem,  CategoryValue, Authorization, Level, OperationNameValue, Properties, EventSubmissionTimestamp, CallerIpAddress
+
