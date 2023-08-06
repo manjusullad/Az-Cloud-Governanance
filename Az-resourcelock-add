@@ -1,0 +1,11 @@
+Alert when Resource Lock configured.
+
+Pre-requisites
+Subscription Activity logs should be configured to Log Analytics workspace.
+
+AzureActivity 
+| where CategoryValue contains "Administrative" and SubscriptionId contains "xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx" and OperationNameValue contains "MICROSOFT.AUTHORIZATION/LOCKS/WRITE" and ActivityStatusValue contains "Succeeded" and _ResourceId contains "corefoundationnodelete" 
+
+| project SourceSystem, SubscriptionId, Type, CategoryValue, TimeGenerated, Caller, CallerIpAddress, _ResourceId, ResourceProviderValue, OperationNameValue, ResourceGroup, ActivityStatusValue, ActivitySubstatusValue
+
+Create Alert group with email and set the alert rule.
